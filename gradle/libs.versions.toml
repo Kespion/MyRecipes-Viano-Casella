@@ -1,26 +1,85 @@
+############################
+# gradle/libs.versions.toml
+############################
 [versions]
-agp = "8.8.1"
-kotlin = "1.9.24"
-coreKtx = "1.15.0"
-junit = "4.13.2"
-junitVersion = "1.2.1"
-espressoCore = "3.6.1"
-appcompat = "1.7.0"
-material = "1.12.0"
-activity = "1.10.1"
-constraintlayout = "2.2.1"
+# Outils
+agp                     = "8.8.1"
+kotlin                  = "1.9.23"
+hilt                    = "2.51"
 
+# AndroidX / Google
+coreKtx                 = "1.13.1"
+appcompat               = "1.7.0"
+material                = "1.12.0"
+constraintlayout        = "2.2.1"
+activity                = "1.10.1"
+
+# Navigation / Lifecycle
+navigation              = "2.7.7"
+lifecycle               = "2.9.0"
+
+# Concurrency
+coroutines              = "1.9.0"
+
+# Room
+room                    = "2.7.0"
+
+# Network
+retrofit                = "2.11.0"
+moshi                   = "1.15.0"
+okhttp-logging          = "4.12.0"
+
+# Glide
+glide                   = "4.16.0"
+
+# Tests
+junit                   = "4.13.2"
+androidx-junit          = "1.1.5"
+espresso-core           = "3.5.1"
+
+############################
 [libraries]
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
-androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+# Core / UI
+androidx-core-ktx           = { module = "androidx.core:core-ktx",                 version.ref = "coreKtx" }
+androidx-appcompat          = { module = "androidx.appcompat:appcompat",           version.ref = "appcompat" }
+material                    = { module = "com.google.android.material:material",   version.ref = "material" }
+androidx-constraintlayout   = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+androidx-activity           = { module = "androidx.activity:activity",             version.ref = "activity" }
 
+# Navigation
+navigation-fragment-ktx     = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+navigation-ui-ktx           = { module = "androidx.navigation:navigation-ui-ktx",       version.ref = "navigation" }
+
+# Lifecycle / Coroutines
+lifecycle-viewmodel-ktx     = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx",   version.ref = "lifecycle" }
+lifecycle-runtime-ktx       = { module = "androidx.lifecycle:lifecycle-runtime-ktx",     version.ref = "lifecycle" }
+kotlinx-coroutines-android  = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+
+# Room
+room-runtime                = { module = "androidx.room:room-runtime",  version.ref = "room" }
+room-ktx                    = { module = "androidx.room:room-ktx",      version.ref = "room" }
+room-compiler               = { module = "androidx.room:room-compiler", version.ref = "room" }
+
+# Hilt
+hilt-android                = { module = "com.google.dagger:hilt-android",          version.ref = "hilt" }
+hilt-android-compiler       = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+
+# Network (Retrofit / Moshi / OkHttp)
+retrofit                    = { module = "com.squareup.retrofit2:retrofit",         version.ref = "retrofit" }
+converter-moshi             = { module = "com.squareup.retrofit2:converter-moshi",  version.ref = "retrofit" }
+moshi-kotlin                = { module = "com.squareup.moshi:moshi-kotlin",         version.ref = "moshi" }
+logging-interceptor         = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp-logging" }
+
+# Glide
+glide                       = { module = "com.github.bumptech.glide:glide",         version.ref = "glide" }
+glide-compiler              = { module = "com.github.bumptech.glide:compiler",      version.ref = "glide" }
+
+# Tests
+junit                       = { module = "junit:junit",                                version.ref = "junit" }
+androidx-junit              = { module = "androidx.test.ext:junit",                    version.ref = "androidx-junit" }
+espresso-core               = { module = "androidx.test.espresso:espresso-core",       version.ref = "espresso-core" }
+
+############################
 [plugins]
-android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
+android-application         = { id = "com.android.application",      version.ref = "agp" }
+kotlin-android              = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/categoriesFragment">
+
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.ynov.myrecipes.ui.categories.CategoryListFragment"
+        android:label="Categories">
+
+        <action
+            android:id="@+id/action_categories_to_meals"
+            app:destination="@id/mealsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mealsFragment"
+        android:name="com.ynov.myrecipes.ui.meals.MealsFragment"
+        android:label="Meals">
+
+        <argument
+            android:name="categoryName"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_meals_to_detail"
+            app:destination="@id/mealDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mealDetailFragment"
+        android:name="com.ynov.myrecipes.ui.detail.MealDetailFragment"
+        android:label="Detail">
+
+        <argument
+            android:name="mealId"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.ynov.myrecipes.ui.favorites.FavoritesFragment"
+        android:label="Favorites" />
+
+    <action
+        android:id="@+id/action_favorites_to_mealDetail"
+        app:destination="@id/mealDetailFragment" />
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.ynov.myrecipes.ui.search.SearchFragment"
+        android:label="Search" />
+
+    <action
+        android:id="@+id/action_searchFragment_to_mealDetailFragment"
+        app:destination="@id/mealDetailFragment" />
+</navigation>
