@@ -1,4 +1,4 @@
-package com.ynov.myrecipes.di
+package com.ynov.myrecipes.module
 
 import android.content.Context
 import androidx.room.Room

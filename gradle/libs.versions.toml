@@ -3,8 +3,8 @@
 ############################
 [versions]
 # Outils
-agp                     = "8.8.1"
-kotlin                  = "1.9.23"
+agp                     = "8.8.2"
+kotlin                  = "2.1.0"
 hilt                    = "2.51"
 
 # AndroidX / Google
@@ -15,14 +15,14 @@ constraintlayout        = "2.2.1"
 activity                = "1.10.1"
 
 # Navigation / Lifecycle
-navigation              = "2.7.7"
+navigation              = "2.9.0"
 lifecycle               = "2.9.0"
 
 # Concurrency
 coroutines              = "1.9.0"
 
 # Room
-room                    = "2.7.0"
+room                    = "2.7.1"
 
 # Network
 retrofit                = "2.11.0"
@@ -34,8 +34,8 @@ glide                   = "4.16.0"
 
 # Tests
 junit                   = "4.13.2"
-androidx-junit          = "1.1.5"
-espresso-core           = "3.5.1"
+androidx-junit          = "1.2.1"
+espresso-core           = "3.6.1"
 
 ############################
 [libraries]
