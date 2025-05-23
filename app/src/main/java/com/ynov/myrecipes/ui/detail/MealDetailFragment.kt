@@ -30,9 +30,20 @@ class MealDetailFragment : Fragment(R.layout.fragment_meal_detail) {
 
         val mealId = requireArguments().getString("mealId") ?: ""
         vm.load(mealId)
+        vm.checkIfFavorite(mealId)
 
         viewLifecycleOwner.lifecycleScope.launch {
             vm.state.collectLatest { render(it) }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            vm.isFavorite.collectLatest { isFavorite ->
+                binding.btnFavorite.text = if (isFavorite) {
+                    getString(R.string.remove_from_favorites)
+                } else {
+                    getString(R.string.add_to_favorites)
+                }
+            }
         }
     }
 
@@ -62,8 +73,15 @@ class MealDetailFragment : Fragment(R.layout.fragment_meal_detail) {
             .joinToString(separator = "\n") { "${it.name}: ${it.measure}" }
 
         btnFavorite.setOnClickListener {
+            val currentFavoriteState = vm.isFavorite.value
+            binding.btnFavorite.text = if (currentFavoriteState) {
+                getString(R.string.add_to_favorites)
+            } else {
+                getString(R.string.remove_from_favorites)
+            }
             vm.onFavoriteClicked()
-            Snackbar.make(root, "Favorite updated", Snackbar.LENGTH_SHORT).show()
+            //Snackbar.make(root, "Favorite updated", Snackbar.LENGTH_SHORT).show()
+            vm.checkIfFavorite(requireArguments().getString("mealId") ?: "")
         }
     }
 

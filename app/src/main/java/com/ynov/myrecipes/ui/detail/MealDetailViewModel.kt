@@ -1,8 +1,8 @@
 package com.ynov.myrecipes.ui.detail
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ynov.myrecipes.data.local.FavoritesDAO
 import com.ynov.myrecipes.domain.model.MealDetail
 import com.ynov.myrecipes.domain.usecase.GetMealDetailsUseCase
 import com.ynov.myrecipes.domain.usecase.ToggleFavoriteUseCase
@@ -16,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MealDetailViewModel @Inject constructor(
     private val getDetail: GetMealDetailsUseCase,
-    val toggleFavorite: ToggleFavoriteUseCase
+    val toggleFavorite: ToggleFavoriteUseCase,
+    private val mealDao: FavoritesDAO
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<Resource<MealDetail>>(Resource.Loading)
@@ -33,5 +34,12 @@ class MealDetailViewModel @Inject constructor(
 
     fun onFavoriteClicked() = viewModelScope.launch {
         (state.value as? Resource.Success)?.data?.let { toggleFavorite(it) }
+    }
+
+    private val _isFavorite = MutableStateFlow(false)
+    val isFavorite: StateFlow<Boolean> = _isFavorite
+
+    fun checkIfFavorite(mealId: String) = viewModelScope.launch {
+        _isFavorite.value = mealDao.isFavorite(mealId)
     }
 }

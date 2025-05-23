@@ -18,7 +18,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etSearch"
-                android:hint="Search..."
+                android:hint="@string/search"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:layout_width="match_parent"
@@ -30,7 +30,7 @@
             android:id="@+id/btnSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Search"
+            android:text="@string/search_button"
             android:layout_marginTop="8dp"/>
 
         <!-- Zone d'affichage des résultats -->
@@ -45,7 +45,7 @@
             android:id="@+id/tvEmpty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No results found!"
+            android:text="@string/no_results_found"
             android:gravity="center"
             android:visibility="gone"
             android:layout_marginTop="8dp"/>

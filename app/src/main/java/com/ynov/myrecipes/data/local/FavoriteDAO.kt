@@ -12,6 +12,9 @@ interface FavoritesDAO {
     @Query("SELECT * FROM favorites ORDER BY savedAt DESC")
     fun observe(): Flow<List<FavoriteEntity>>
 
+    @Query("SELECT EXISTS(SELECT 1 FROM favorites WHERE id = :mealId)")
+    suspend fun isFavorite(mealId: String): Boolean
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(entity: FavoriteEntity)
 
