@@ -16,7 +16,6 @@ class FavoritesRepository @Inject constructor(
     private val dao: FavoritesDAO,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    /** Flux perpétuel des favoris ordonnés (B8). */
     val favorites: Flow<List<FavoriteEntity>> = dao.observe()
 
     suspend fun toggle(meal: MealDetail) = withContext(ioDispatcher) {

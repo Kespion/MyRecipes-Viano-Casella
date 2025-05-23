@@ -53,7 +53,6 @@ dependencies {
         }
     }
 
-    // aligne TOUT Kotlin sur 1.9.23
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 
     // --- Core / UI
@@ -67,7 +66,7 @@ dependencies {
     implementation(libs.navigation.ui.ktx)
 
     // --- Network
-    implementation(libs.retrofit)           // 2.11.0
+    implementation(libs.retrofit)
     implementation(libs.converter.moshi)
     implementation(libs.logging.interceptor)
     implementation(libs.moshi.kotlin)
@@ -90,7 +89,7 @@ dependencies {
     implementation(libs.glide)
     kapt(libs.glide.compiler)
 
-    implementation(libs.moshi.kotlin)                 // runtime
+    implementation(libs.moshi.kotlin)
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.15.0")
 
     // --- Tests

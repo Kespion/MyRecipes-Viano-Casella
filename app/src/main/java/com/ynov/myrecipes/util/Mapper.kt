@@ -3,7 +3,6 @@ package com.ynov.myrecipes.util
 import com.ynov.myrecipes.data.api.dto.CategoryDTO
 import com.ynov.myrecipes.data.api.dto.MealDTO
 import com.ynov.myrecipes.data.api.dto.MealDetailDTO
-import com.ynov.myrecipes.data.api.dto.MealDetailResponse
 import com.ynov.myrecipes.domain.model.Category
 import com.ynov.myrecipes.domain.model.Ingredient
 import com.ynov.myrecipes.domain.model.Meal

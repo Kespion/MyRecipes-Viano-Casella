@@ -22,41 +22,34 @@ class CategoryListFragment : Fragment(R.layout.fragment_category_list) {
 
     private val vm: CategoriesViewModel by viewModels()
 
-    // --- ViewBinding ---
     private var _binding: FragmentCategoryListBinding? = null
     private val binding get() = _binding!!
 
-    // --- Adapter ---
     private lateinit var adapter: CategoryAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentCategoryListBinding.bind(view)
 
-        // 1. Adapter avec callback de clic
         adapter = CategoryAdapter { onCategoryClicked(it) }
         binding.recyclerView.adapter = adapter
 
-        // 2. Observe l’état du ViewModel
         viewLifecycleOwner.lifecycleScope.launch {
             vm.state.collectLatest(::render)
         }
     }
 
-    /** Rend la vue selon l’état (loading / data / error). */
     private fun render(state: Resource<List<Category>>) = with(binding) {
 
-        // 1. Affiche ou cache le loader
         progress.isVisible = state is Resource.Loading
 
         when (state) {
             is Resource.Success -> adapter.submitList(state.data)
-            is Resource.Error   -> Snackbar.make(root, state.message ?: "Erreur inconnue", Snackbar.LENGTH_LONG).show()
+            is Resource.Error   -> Snackbar.make(root, state.message ?: "Unknown error", Snackbar.LENGTH_LONG).show()
             Resource.Loading    -> Unit
         }
     }
 
-    /** Navigation vers la liste des recettes d’une catégorie. */
     private fun onCategoryClicked(category: Category) {
         val bundle = bundleOf("categoryName" to category.name)
         findNavController().navigate(R.id.action_categories_to_meals, bundle)

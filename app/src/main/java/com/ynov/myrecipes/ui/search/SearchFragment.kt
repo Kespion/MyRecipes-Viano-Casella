@@ -23,22 +23,18 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private val vm: SearchViewModel by viewModels()
 
-    // ViewBinding
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
-    // Adapter
     private lateinit var adapter: MealsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentSearchBinding.bind(view)
 
-        // 1. Configure RecyclerView
         adapter = MealsAdapter { meal -> onMealClicked(meal) }
         binding.recyclerSearch.adapter = adapter
 
-        // 2. Observe VM state
         viewLifecycleOwner.lifecycleScope.launch {
             vm.state.collectLatest { state ->
                 binding.progress.isVisible = state is Resource.Loading
@@ -48,14 +44,13 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                         binding.tvEmpty.isVisible = state.data.isEmpty()
                     }
                     is Resource.Error ->
-                        Snackbar.make(binding.root, state.message ?: "Erreur inconnue", Snackbar.LENGTH_LONG)
+                        Snackbar.make(binding.root, state.message ?: "Unknown error", Snackbar.LENGTH_LONG)
                             .show()
                     Resource.Loading -> Unit
                 }
             }
         }
 
-        // 3. Handle search action
         binding.btnSearch.setOnClickListener {
             val query = binding.etSearch.text.toString().trim()
             if (query.isNotEmpty()) {

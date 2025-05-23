@@ -1,7 +1,6 @@
 package com.ynov.myrecipes.data.api
 
 import com.ynov.myrecipes.data.api.dto.CategoriesDTO
-import com.ynov.myrecipes.data.api.dto.MealDetailDTO
 import com.ynov.myrecipes.data.api.dto.MealDetailResponse
 import com.ynov.myrecipes.data.api.dto.MealsDTO
 import okhttp3.OkHttpClient

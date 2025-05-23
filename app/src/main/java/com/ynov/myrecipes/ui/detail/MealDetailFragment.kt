@@ -21,7 +21,6 @@ class MealDetailFragment : Fragment(R.layout.fragment_meal_detail) {
 
     private val vm: MealDetailViewModel by viewModels()
 
-    // ViewBinding
     private var _binding: FragmentMealDetailBinding? = null
     private val binding get() = _binding!!
 
@@ -29,51 +28,42 @@ class MealDetailFragment : Fragment(R.layout.fragment_meal_detail) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMealDetailBinding.bind(view)
 
-        // Récupère l’ID passé en argument et charge
         val mealId = requireArguments().getString("mealId") ?: ""
         vm.load(mealId)
 
-        // Observe l’état du chargement
         viewLifecycleOwner.lifecycleScope.launch {
             vm.state.collectLatest { render(it) }
         }
     }
 
     private fun render(state: Resource<MealDetail>) = with(binding) {
-        // Affiche/caché le loader
         progress.isVisible = state is Resource.Loading
 
         when (state) {
             is Resource.Success -> bindDetail(state.data)
             is Resource.Error -> Snackbar
-                .make(root, state.message ?: "Erreur inconnue", Snackbar.LENGTH_LONG)
+                .make(root, state.message ?: "Unknown error", Snackbar.LENGTH_LONG)
                 .show()
-            Resource.Loading -> { /* rien à faire */ }
+            Resource.Loading -> {  }
         }
     }
 
-    /** Remplit les vues avec les données de la recette. */
     private fun bindDetail(detail: MealDetail) = with(binding) {
-        // Texte et image
         tvName.text = detail.name
         tvCategory.text = detail.category
         tvArea.text = detail.area
         Glide.with(ivPhoto).load(detail.thumb).into(ivPhoto)
 
-        // Instructions
         tvInstructions.text = detail.instructions
 
-        // Nutri-score
         nutriScoreGauge.percent = (detail.nutriScorePercent)
 
-        // Liste des ingrédients + quantités
         tvIngredients.text = detail.ingredients
             .joinToString(separator = "\n") { "${it.name}: ${it.measure}" }
 
-        // Bouton favoris
         btnFavorite.setOnClickListener {
             vm.onFavoriteClicked()
-            Snackbar.make(root, "Favori mis à jour", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(root, "Favorite updated", Snackbar.LENGTH_SHORT).show()
         }
     }
 
