@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Contenu scrollable -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,14 +14,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- Photo -->
             <ImageView
                 android:id="@+id/ivPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop" />
 
-            <!-- Nom de la recette -->
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="match_parent"
@@ -31,14 +28,12 @@
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"/>
 
-            <!-- Nutri-score -->
             <com.ynov.myrecipes.ui.detail.NutriScoreGauge
                 android:id="@+id/nutriScoreGauge"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="12dp"/>
 
-            <!-- Catégorie et pays -->
             <TextView
                 android:id="@+id/tvCategory"
                 android:layout_width="match_parent"
@@ -50,14 +45,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <!-- Instructions -->
             <TextView
                 android:id="@+id/tvInstructions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"/>
 
-            <!-- Liste des ingrédients -->
             <TextView
                 android:text="Ingredients"
                 android:textStyle="bold"
@@ -71,7 +64,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"/>
 
-            <!-- Bouton favoris -->
             <Button
                 android:id="@+id/btnFavorite"
                 android:layout_width="match_parent"
@@ -81,7 +73,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Loader au centre de l'écran -->
     <ProgressBar
         android:id="@+id/progress"
         style="?android:attr/progressBarStyleLarge"

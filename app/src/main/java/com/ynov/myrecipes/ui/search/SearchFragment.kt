@@ -13,7 +13,6 @@ import com.ynov.myrecipes.R
 import com.ynov.myrecipes.databinding.FragmentSearchBinding
 import com.ynov.myrecipes.domain.model.Meal
 import com.ynov.myrecipes.ui.common.Resource
-import com.ynov.myrecipes.ui.meals.MealsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -26,13 +25,13 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: MealsAdapter
+    private lateinit var adapter: SearchAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentSearchBinding.bind(view)
 
-        adapter = MealsAdapter { meal -> onMealClicked(meal) }
+        adapter = SearchAdapter { meal -> onMealClicked(meal) }
         binding.recyclerSearch.adapter = adapter
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -43,9 +42,15 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                         adapter.submitList(state.data)
                         binding.tvEmpty.isVisible = state.data.isEmpty()
                     }
+
                     is Resource.Error ->
-                        Snackbar.make(binding.root, state.message ?: "Unknown error", Snackbar.LENGTH_LONG)
+                        Snackbar.make(
+                            binding.root,
+                            state.message ?: "Unknown error",
+                            Snackbar.LENGTH_LONG
+                        )
                             .show()
+
                     Resource.Loading -> Unit
                 }
             }
@@ -53,11 +58,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         binding.btnSearch.setOnClickListener {
             val query = binding.etSearch.text.toString().trim()
-            if (query.isNotEmpty()) {
-                vm.updateQuery(query)
-            } else {
-                Snackbar.make(binding.root, "Veuillez saisir un terme de recherche", Snackbar.LENGTH_SHORT).show()
-            }
+            vm.updateQuery(query)
         }
     }
 

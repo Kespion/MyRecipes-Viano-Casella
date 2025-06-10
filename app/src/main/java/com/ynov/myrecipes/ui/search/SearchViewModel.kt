@@ -22,19 +22,20 @@ class SearchViewModel @Inject constructor(
         .debounce(300)
         .filter { it.length >= 2 }
         .distinctUntilChanged()
-        .flatMapLatest {
+        .flatMapLatest { query ->
             flow {
                 emit(Resource.Loading)
                 try {
-                    emit(Resource.Success(searchMeals(it)))
+                    val results = searchMeals(query)
+                    emit(Resource.Success(results))
                 } catch (e: Exception) {
-                    emit(Resource.Error(e.message ?: "Unknown"))
+                    emit(Resource.Error(e.message ?: "Unknown error"))
                 }
             }
         }
         .stateIn(viewModelScope, SharingStarted.Lazily, Resource.Loading)
 
-    fun updateQuery(q: String) {
-        queryFlow.value = q
+    fun updateQuery(query: String) {
+        queryFlow.value = query
     }
 }
